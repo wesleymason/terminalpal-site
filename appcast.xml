@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>TerminalPal</title>
+        <item>
+            <title>1.0</title>
+            <pubDate>Fri, 03 Jul 2026 11:28:53 -0700</pubDate>
+            <sparkle:version>1</sparkle:version>
+            <sparkle:shortVersionString>1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://www.terminalpal.com/TerminalPal.zip" length="2136458" type="application/octet-stream" sparkle:edSignature="A8f2xvgOvdrcng3LSuNNllYbLg8WS0W3xrj7Idn0HYLbx1sQrX6V6N/Q5AO+qCt9iwWj57dJih34cfbDruSsDw=="/>
+        </item>
+    </channel>
+</rss>

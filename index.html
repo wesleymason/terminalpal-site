@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terminal Pal — your dev environment, one click</title>
+<meta name="description" content="Terminal Pal is a Mac menu bar app that opens your terminal windows and types your daily startup commands for you. One click, and you're in.">
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; overflow: hidden; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    background: radial-gradient(120% 120% at 50% 0%, #3a3a40 0%, #232326 45%, #161618 100%);
+    color: #f2f7f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { display: flex; flex-direction: column; align-items: center; gap: 28px; padding: 24px; }
+  .icon { width: 148px; height: 148px; }
+  h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; }
+  p.tag { font-size: 20px; color: #b9c4c1; max-width: 420px; line-height: 1.45; }
+  p.tag strong { color: #d5f2ee; font-weight: 600; }
+  a.download {
+    display: inline-block;
+    background: #d5f2ee;
+    color: #161618;
+    font-size: 19px;
+    font-weight: 650;
+    text-decoration: none;
+    padding: 18px 44px;
+    border-radius: 999px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 8px 28px rgba(213, 242, 238, 0.18);
+  }
+  a.download:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(213, 242, 238, 0.28); }
+  p.fine { font-size: 13px; color: #7d8886; }
+  @media (max-height: 560px) { .icon { width: 96px; height: 96px; } h1 { font-size: 34px; } }
+</style>
+</head>
+<body>
+<main>
+  <img class="icon" src="icon.png" alt="Terminal Pal icon" width="148" height="148">
+  <h1>Terminal Pal</h1>
+  <p class="tag">Your dev environment, <strong>one click</strong>.<br>It opens your terminal windows and types your morning setup for you.</p>
+  <a class="download" href="TerminalPal.dmg" download>Download for Mac</a>
+  <p class="fine">Free · macOS 14 or later · Apple&nbsp;Silicon&nbsp;&amp;&nbsp;Intel</p>
+</main>
+</body>
+</html>
