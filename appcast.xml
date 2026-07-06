@@ -3,12 +3,12 @@
     <channel>
         <title>TerminalPal</title>
         <item>
-            <title>1.0.3</title>
-            <pubDate>Mon, 06 Jul 2026 14:05:08 -0700</pubDate>
-            <sparkle:version>4</sparkle:version>
-            <sparkle:shortVersionString>1.0.3</sparkle:shortVersionString>
+            <title>1.0.4</title>
+            <pubDate>Mon, 06 Jul 2026 14:39:39 -0700</pubDate>
+            <sparkle:version>5</sparkle:version>
+            <sparkle:shortVersionString>1.0.4</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://www.terminalpal.com/TerminalPal.zip" length="2198774" type="application/octet-stream" sparkle:edSignature="cCpoXOXzPrAYFvJiVcyvDq/6DqIXAG+8zxGA3+1tpjvkX7VtQMi08VmBs2pb+SIDTPrg/L3MQmIbT7I1wrIWDg=="/>
+            <enclosure url="https://www.terminalpal.com/TerminalPal.zip" length="2199777" type="application/octet-stream" sparkle:edSignature="V007hvPohjN5/qxoYMMu0BY46HPY09VxMknQuTNb2wiRPsC+z5ybIyIzs6pcMHK/c6Y27tj7RuaJkkL4X+3/BA=="/>
         </item>
     </channel>
 </rss>
