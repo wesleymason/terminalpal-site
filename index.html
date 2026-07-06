@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Terminal Pal — Automate Your Daily Terminal Commands on Mac</title>
+<title>Terminal Pal: Automate Your Daily Terminal Commands on Mac</title>
 <meta name="description" content="Stop copy-pasting the same terminal commands every day. Terminal Pal is a free Mac menu bar app that opens your terminal windows and types your saved SSH and setup commands in one click.">
 <link rel="canonical" href="https://www.terminalpal.com/">
-<meta property="og:title" content="Terminal Pal — Automate Your Daily Terminal Commands on Mac">
+<meta property="og:title" content="Terminal Pal: Automate Your Daily Terminal Commands on Mac">
 <meta property="og:description" content="All of your terminal commands, one click. Terminal Pal opens your terminal windows and types your saved commands for you.">
 <meta property="og:image" content="https://www.terminalpal.com/social-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Terminal Pal — all of your terminal commands, one click">
+<meta property="og:image:alt" content="Terminal Pal: all of your terminal commands, one click">
 <meta property="og:url" content="https://www.terminalpal.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Terminal Pal">
@@ -19,7 +19,7 @@
 <meta name="twitter:title" content="Terminal Pal">
 <meta name="twitter:description" content="All of your terminal commands, one click.">
 <meta name="twitter:image" content="https://www.terminalpal.com/social-card.png">
-<meta name="twitter:image:alt" content="Terminal Pal — all of your terminal commands, one click">
+<meta name="twitter:image:alt" content="Terminal Pal: all of your terminal commands, one click">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="icon.png">
 <!-- Google tag (gtag.js) -->
@@ -38,11 +38,11 @@
   "name": "Terminal Pal",
   "operatingSystem": "macOS 14.0 or later",
   "applicationCategory": "DeveloperApplication",
-  "description": "Terminal Pal automates repetitive terminal tasks on Mac. Instead of copy-pasting the same commands into your terminal every day — SSH into a dev server, start services, launch tools — you save them once, and one click from the menu bar opens your terminal windows and types every command for you. Works with Terminal, iTerm2, Ghostty, Warp, and more.",
+  "description": "Terminal Pal automates repetitive terminal tasks on Mac. Instead of copy-pasting the same commands into your terminal every day, like SSHing into a dev server, starting services, or launching tools, you save them once, and one click from the menu bar opens your terminal windows and types every command for you. Works with Terminal, iTerm2, Ghostty, Warp, and more.",
   "image": "https://www.terminalpal.com/social-card.png",
   "url": "https://www.terminalpal.com/",
   "downloadUrl": "https://www.terminalpal.com/TerminalPal.dmg",
-  "softwareVersion": "1.0.5",
+  "softwareVersion": "1.1.0",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -387,6 +387,37 @@
     color: #6d7875;
   }
 
+  /* ---------- FAQ ---------- */
+  .faq { max-width: 640px; margin: 48px auto 0; padding: 0 24px; }
+  .faq h2 {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 36px;
+  }
+  .faq details {
+    background: #232327;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .faq summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 18px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '＋'; color: #5ccdb0; font-weight: 400; }
+  .faq details[open] summary::after { content: '−'; }
+  .faq details p { padding: 0 18px 16px; color: #9aa5a2; font-size: 14.5px; line-height: 1.6; }
+
   /* ---------- Bottom CTA ---------- */
   .bottom-cta {
     text-align: center;
@@ -411,7 +442,7 @@
 <body>
 
 <section class="hero">
-  <img class="icon" src="icon.png" alt="Terminal Pal — Mac app that automates repetitive terminal commands" width="148" height="148">
+  <img class="icon" src="icon.png" alt="Terminal Pal: Mac app that automates repetitive terminal commands" width="148" height="148">
   <h1>Terminal Pal</h1>
   <p class="tag"><strong>All of your terminal commands, one click.</strong><br>Terminal Pal opens your terminal windows and<br>types your saved commands for you.<br>Set it up once, never type them again.</p>
   <a class="download" href="TerminalPal.dmg" download>Download for Mac</a>
@@ -430,7 +461,7 @@
       </div>
     </div>
     <div class="macwin editor">
-      <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Terminal Pal — Edit Commands</div></div>
+      <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Terminal Pal - Edit Commands</div></div>
       <div class="editor-body">
         <div class="wf-side">
           <div class="wf-list">
@@ -496,7 +527,7 @@
     </div>
     <div class="terms">
       <div class="macwin term one">
-        <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Dev server — ssh dev-box</div></div>
+        <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Dev server - ssh dev-box</div></div>
         <div class="screen"><span class="t-prompt">~ $</span> ssh dev-box
 <span class="t-dim">Welcome to dev-box (Ubuntu 24.04.2 LTS)
 Last login: Mon Jul  6 08:57:12 2026</span>
@@ -509,7 +540,7 @@ Last login: Mon Jul  6 08:57:12 2026</span>
  <span class="t-ok">✓ Ready in 1.2s</span></div>
       </div>
       <div class="macwin term two">
-        <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Logs — ssh dev-box</div></div>
+        <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Logs - ssh dev-box</div></div>
         <div class="screen"><span class="t-prompt">~ $</span> ssh dev-box
 <span class="t-dim">Welcome to dev-box (Ubuntu 24.04.2 LTS)</span>
 <span class="t-prompt">wes@dev-box:~$</span> tail -f ~/code/my-app/logs/app.log
@@ -526,7 +557,7 @@ Last login: Mon Jul  6 08:57:12 2026</span>
 
       <div class="demo-scene on" id="demo-editor">
         <div class="macwin editor">
-          <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Terminal Pal — Edit Commands</div></div>
+          <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Terminal Pal - Edit Commands</div></div>
           <div class="editor-body">
             <div class="wf-side">
               <div class="wf-list">
@@ -574,11 +605,11 @@ Last login: Mon Jul  6 08:57:12 2026</span>
       <div class="demo-scene" id="demo-terms">
         <div class="terms">
           <div class="macwin term one">
-            <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Dev server — ssh dev-box</div></div>
+            <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Dev server - ssh dev-box</div></div>
             <div class="screen" id="d-screen1"></div>
           </div>
           <div class="macwin term two" id="d-term2">
-            <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Logs — ssh dev-box</div></div>
+            <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Logs - ssh dev-box</div></div>
             <div class="screen" id="d-screen2"></div>
           </div>
         </div>
@@ -588,6 +619,44 @@ Last login: Mon Jul  6 08:57:12 2026</span>
   </div>
 
 </section>
+
+<section class="faq" id="faq">
+  <h2>Questions</h2>
+  <details>
+    <summary>Is Terminal Pal safe?</summary>
+    <p>Yes. The app is signed with an Apple Developer ID and notarized by Apple, which means every release is scanned by Apple before it reaches you. Your commands are stored in a plain file on your Mac and never leave it. The app has no analytics or tracking, and its only network request is checking for updates.</p>
+  </details>
+  <details>
+    <summary>Why does macOS ask me to let it control Terminal?</summary>
+    <p>Typing your commands into terminal windows is literally how Terminal Pal works, and macOS requires your one-time permission before any app can control another. Click Allow the first time you run your commands, and you're set forever.</p>
+  </details>
+  <details>
+    <summary>Which terminal apps are supported?</summary>
+    <p>The built-in macOS Terminal and iTerm2 get full support: commands are typed one at a time, just like you would. Ghostty, Warp, kitty, WezTerm, Alacritty, and Tabby are also supported: each window's commands run as a single combined command.</p>
+  </details>
+  <details>
+    <summary>Does it work with SSH?</summary>
+    <p>Yes, that's the main event. Commands listed after an <code>ssh</code> line are typed into the live session, so they run on the remote machine, exactly as if you typed them yourself.</p>
+  </details>
+  <details>
+    <summary>How much does it cost?</summary>
+    <p>Terminal Pal is free. It requires macOS 14 or later and runs natively on Apple&nbsp;Silicon and Intel Macs. Updates install themselves.</p>
+  </details>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Is Terminal Pal safe?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The app is signed with an Apple Developer ID and notarized by Apple. Your commands are stored in a plain file on your Mac and never leave it. The app has no analytics or tracking, and its only network request is checking for updates." } },
+    { "@type": "Question", "name": "Why does macOS ask me to let it control Terminal?", "acceptedAnswer": { "@type": "Answer", "text": "Typing your commands into terminal windows is how Terminal Pal works, and macOS requires one-time permission before any app can control another. Click Allow the first time you run your commands." } },
+    { "@type": "Question", "name": "Which terminal apps are supported?", "acceptedAnswer": { "@type": "Answer", "text": "The built-in macOS Terminal and iTerm2 get full command-by-command support. Ghostty, Warp, kitty, WezTerm, Alacritty, and Tabby are supported with each window's commands running as a single combined command." } },
+    { "@type": "Question", "name": "Does it work with SSH?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Commands listed after an ssh line are typed into the live session, so they run on the remote machine exactly as if you typed them yourself." } },
+    { "@type": "Question", "name": "How much does it cost?", "acceptedAnswer": { "@type": "Answer", "text": "Terminal Pal is free. It requires macOS 14 or later and runs natively on Apple Silicon and Intel Macs." } }
+  ]
+}
+</script>
 
 <div class="bottom-cta">
   <a class="download" href="TerminalPal.dmg" download>Download for Mac</a>
