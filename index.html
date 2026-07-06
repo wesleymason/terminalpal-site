@@ -29,7 +29,7 @@
   "image": "https://www.terminalpal.com/social-card.png",
   "url": "https://www.terminalpal.com/",
   "downloadUrl": "https://www.terminalpal.com/TerminalPal.dmg",
-  "softwareVersion": "1.0.1",
+  "softwareVersion": "1.0.2",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -155,67 +155,95 @@
     pointer-events: none;
   }
 
-  /* ---------- Step 1: editor window ---------- */
-  .editor { background: #eef6f4; color: #1d1d1f; max-width: 640px; margin: 0 auto; }
-  .editor .titlebar { background: #e2ecea; }
-  .editor .title { color: #6e7876; }
-  .editor .body { padding: 18px 20px 14px; }
-  .editor .hint { font-size: 12.5px; color: #7a8481; line-height: 1.45; margin-bottom: 14px; }
+  /* ---------- Step 1: editor window (dark theme) ---------- */
+  .editor { background: #232327; color: #e8ecea; max-width: 700px; margin: 0 auto; }
+  .editor .titlebar { background: #2e2e33; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .editor .title { color: #9aa19f; }
+  .editor-body { display: flex; }
+  .wf-side {
+    width: 148px;
+    flex: none;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .wf-list { flex: 1; padding: 8px 6px; }
+  .wf-row {
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    color: #cdd6d3;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .wf-row.sel { background: rgba(92, 205, 176, 0.32); color: #d5f2ee; font-weight: 600; }
+  .wf-foot {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 6px 10px;
+    color: #9aa19f;
+    font-size: 14px;
+    letter-spacing: 8px;
+  }
+  .editor .main { flex: 1; padding: 14px 16px 10px; min-width: 0; }
+  .editor .hint { font-size: 12px; color: #8b9591; line-height: 1.45; margin-bottom: 12px; }
+  .dark-field {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 6px;
+    background: rgba(0,0,0,0.35);
+    font-size: 12.5px;
+    padding: 5px 9px;
+    color: #e8ecea;
+  }
+  .wf-name { width: 200px; margin-bottom: 12px; }
   .group {
-    background: #ffffff;
-    border: 1px solid rgba(52, 143, 124, 0.28);
+    background: #2b2b30;
+    border: 1px solid rgba(92, 205, 176, 0.28);
     border-radius: 8px;
     padding: 12px 14px;
     margin-bottom: 14px;
   }
   .group .name-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-  .name-field {
-    border: 1px solid #d5dbd9;
-    border-radius: 6px;
-    background: #fff;
-    font-size: 13px;
-    padding: 5px 9px;
-    width: 180px;
-    color: #1d1d1f;
-  }
-  .group .tools { margin-left: auto; color: #9aa5a2; font-size: 12px; letter-spacing: 3px; }
+  .name-field { width: 150px; }
+  .group .tools { margin-left: auto; color: #8b9591; font-size: 12px; letter-spacing: 3px; }
   .cmd-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
   .cmd-field {
     flex: 1;
-    border: 1px solid #d5dbd9;
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 6px;
-    background: #fff;
+    background: rgba(0,0,0,0.55);
     font-family: "SF Mono", ui-monospace, Menlo, monospace;
-    font-size: 12.5px;
+    font-size: 12px;
     padding: 6px 9px;
-    color: #1d1d1f;
+    color: #d5f2ee;
     white-space: nowrap;
     overflow: hidden;
   }
-  .wait { font-size: 11px; color: #8a9491; }
+  .wait { font-size: 11px; color: #8b9591; }
   .wait-field {
-    width: 34px;
-    border: 1px solid #d5dbd9;
+    width: 30px;
+    border: 1px solid rgba(255,255,255,0.10);
     border-radius: 6px;
-    background: #fff;
+    background: rgba(0,0,0,0.35);
     font-size: 12px;
     padding: 5px 6px;
     text-align: right;
-    color: #1d1d1f;
+    color: #e8ecea;
   }
-  .row-tools { color: #9aa5a2; font-size: 12px; letter-spacing: 3px; }
-  .add-btn { color: #348f7c; font-size: 12.5px; font-weight: 600; margin-top: 2px; }
-  .add-window { color: #348f7c; font-size: 13.5px; font-weight: 600; margin: 2px 0 6px; }
+  .row-tools { color: #8b9591; font-size: 12px; letter-spacing: 3px; }
+  .add-btn { color: #5ccdb0; font-size: 12.5px; font-weight: 600; margin-top: 2px; }
+  .add-window { color: #5ccdb0; font-size: 13.5px; font-weight: 600; margin: 2px 0 6px; }
   .editor .savebar {
-    border-top: 1px solid #dbe5e2;
-    padding: 8px 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 8px 16px;
     display: flex;
     align-items: center;
     gap: 6px;
     font-size: 11px;
-    color: #7a8481;
+    color: #8b9591;
   }
-  .savebar .mintdot { width: 6px; height: 6px; border-radius: 50%; background: #348f7c; }
+  .savebar .mintdot { width: 6px; height: 6px; border-radius: 50%; background: #5ccdb0; }
 
   /* ---------- Step 2: menu bar dropdown ---------- */
   .menubar-scene { max-width: 400px; margin: 0 auto; }
@@ -323,22 +351,33 @@
     </div>
     <div class="macwin editor">
       <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Terminal Pal — Edit Commands</div></div>
-      <div class="body">
-        <p class="hint">Each group opens its own terminal window and types its commands in order. Add a delay after any command that needs time to finish — e.g. 2–3 seconds after `ssh` so it can connect before the next command is sent.</p>
-        <div class="group">
-          <div class="name-row"><span class="name-field">Dev server</span><span class="tools">↑ ↓ 🗑</span></div>
-          <div class="cmd-row"><span class="cmd-field">ssh dev-box</span><span class="wait">wait</span><span class="wait-field">2</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
-          <div class="cmd-row"><span class="cmd-field">cd ~/code/my-app</span><span class="wait">wait</span><span class="wait-field">0</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
-          <div class="cmd-row"><span class="cmd-field">npm run dev</span><span class="wait">wait</span><span class="wait-field">0</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
-          <div class="add-btn">＋ Add Command</div>
+      <div class="editor-body">
+        <div class="wf-side">
+          <div class="wf-list">
+            <div class="wf-row sel">Playground</div>
+            <div class="wf-row">Prod</div>
+            <div class="wf-row">Side project</div>
+          </div>
+          <div class="wf-foot">＋ −</div>
         </div>
-        <div class="group">
-          <div class="name-row"><span class="name-field">Logs</span><span class="tools">↑ ↓ 🗑</span></div>
-          <div class="cmd-row"><span class="cmd-field">ssh dev-box</span><span class="wait">wait</span><span class="wait-field">2</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
-          <div class="cmd-row"><span class="cmd-field">tail -f ~/code/my-app/logs/app.log</span><span class="wait">wait</span><span class="wait-field">0</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
-          <div class="add-btn">＋ Add Command</div>
+        <div class="main">
+          <p class="hint">A workflow is a set of terminal windows that runs together from the menu bar. Each window types its commands in order; add a delay where something needs time, like `ssh`.</p>
+          <span class="dark-field wf-name">Playground</span>
+          <div class="group">
+            <div class="name-row"><span class="dark-field name-field">Dev server</span><span class="tools">↑ ↓ 🗑</span></div>
+            <div class="cmd-row"><span class="cmd-field">ssh dev-box</span><span class="wait">wait</span><span class="wait-field">2</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+            <div class="cmd-row"><span class="cmd-field">cd ~/code/my-app</span><span class="wait">wait</span><span class="wait-field">0</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+            <div class="cmd-row"><span class="cmd-field">npm run dev</span><span class="wait">wait</span><span class="wait-field">0</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+            <div class="add-btn">＋ Add Command</div>
+          </div>
+          <div class="group">
+            <div class="name-row"><span class="dark-field name-field">Logs</span><span class="tools">↑ ↓ 🗑</span></div>
+            <div class="cmd-row"><span class="cmd-field">ssh dev-box</span><span class="wait">wait</span><span class="wait-field">2</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+            <div class="cmd-row"><span class="cmd-field">tail -f ~/code/my-app/logs/app.log</span><span class="wait">wait</span><span class="wait-field">0</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+            <div class="add-btn">＋ Add Command</div>
+          </div>
+          <div class="add-window">＋ Add Window</div>
         </div>
-        <div class="add-window">＋ Add Window</div>
       </div>
       <div class="savebar"><span class="mintdot"></span> Saved automatically</div>
     </div>
@@ -349,13 +388,15 @@
       <div class="step-num">2</div>
       <div>
         <h3>One click every morning</h3>
-        <p class="desc">Terminal Pal lives in your menu bar. Click the icon, hit Run Startup Commands, and it does the work for you.</p>
+        <p class="desc">Terminal Pal lives in your menu bar. Click the icon, pick a workflow to run, and it does the work for you.</p>
       </div>
     </div>
     <div class="menubar-scene">
       <div class="menubar"><span class="glyph">&gt;‿</span><span>Mon Jul 6</span><span>9:01 AM</span></div>
       <div class="dropdown">
-        <div class="mi hl"><span>Run Startup Commands</span><span class="kbd">⌘R</span></div>
+        <div class="mi hl"><span>Run Playground</span><span class="kbd">⌘R</span></div>
+        <div class="mi"><span>Run Prod</span></div>
+        <div class="mi"><span>Run Side project</span></div>
         <div class="mi"><span>Edit Commands…</span><span class="kbd">⌘E</span></div>
         <div class="mdivider"></div>
         <div class="mi"><span>Check for Updates…</span></div>
