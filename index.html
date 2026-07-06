@@ -269,6 +269,14 @@
     box-shadow: 0 24px 70px rgba(0,0,0,0.55);
   }
   .menubar .glyph { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-weight: 700; color: #d5f2ee; }
+  .mb-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .mb-item svg { display: block; }
+  .mb-item.active { background: rgba(255,255,255,0.25); }
   .dropdown {
     background: rgba(48, 48, 53, 0.98);
     border: 1px solid rgba(255,255,255,0.09);
@@ -315,6 +323,65 @@
   .t-dim { color: #82918d; }
   .t-ok { color: #58c98a; }
   .t-accent { color: #d5f2ee; }
+
+  /* ---------- Animated demo ---------- */
+  .demo-block { margin-top: 110px; }
+  .demo-block h2 {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+  }
+  .demo-stage { position: relative; max-width: 700px; margin: 0 auto; height: 470px; }
+  .demo-scene {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    pointer-events: none;
+  }
+  .demo-scene.on { opacity: 1; }
+  .demo-scene .menu-wrap { padding-top: 110px; position: relative; }
+  #d-dropdown {
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+  #d-dropdown.open { opacity: 1; transform: none; }
+  .demo-cursor {
+    position: absolute;
+    left: 60px;
+    top: 300px;
+    z-index: 6;
+    opacity: 0;
+    pointer-events: none;
+    transition: left 0.65s cubic-bezier(0.3, 0.7, 0.3, 1), top 0.65s cubic-bezier(0.3, 0.7, 0.3, 1), opacity 0.25s ease;
+  }
+  .demo-cursor.jump { transition: opacity 0.25s ease; }
+  .demo-scene .terms { padding-top: 10px; }
+  .caret::after {
+    content: '';
+    display: inline-block;
+    width: 1.5px;
+    height: 12px;
+    background: #d5f2ee;
+    margin-left: 1px;
+    vertical-align: -2px;
+    animation: demoblink 0.9s steps(1) infinite;
+  }
+  @keyframes demoblink { 50% { opacity: 0; } }
+  .mi.hl.clicked { animation: democlick 0.4s ease; }
+  @keyframes democlick { 40% { filter: brightness(0.7); } }
+  #d-term2 { opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; }
+  #d-term2.shown { opacity: 1; transform: none; }
+  .demo-scene .screen div { min-height: 1.65em; }
+  /* Empty demo inputs keep their real height and show placeholder text,
+     exactly like the app's fields. */
+  .cmd-field:empty::before {
+    content: attr(data-ph);
+    color: #6d7875;
+  }
 
   /* ---------- Bottom CTA ---------- */
   .bottom-cta {
@@ -401,11 +468,12 @@
       </div>
     </div>
     <div class="menubar-scene">
-      <div class="menubar"><span class="glyph">&gt;‿</span><span>Mon Jul 6</span><span>9:01 AM</span></div>
+      <div class="menubar"><span class="mb-item"><svg viewBox="0 0 18 18" width="16" height="16" fill="none" stroke="#e8ecea" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="15" height="13" rx="3"/><path d="M5 6.8 L7.2 8 L5 9.2"/><path d="M9.8 8 H12.4"/><path d="M5.8 11.4 C7.4 13.2 10.6 13.2 12.2 11.4"/></svg></span><span>Mon Jul 6</span><span>9:01 AM</span></div>
       <div class="dropdown">
         <div class="mi hl"><span>Run Playground</span><span class="kbd">⌘R</span></div>
         <div class="mi"><span>Run Prod</span></div>
         <div class="mi"><span>Run Side project</span></div>
+        <div class="mdivider"></div>
         <div class="mi"><span>Edit Commands…</span><span class="kbd">⌘E</span></div>
         <div class="mdivider"></div>
         <div class="mi"><span>Check for Updates…</span></div>
@@ -448,6 +516,73 @@ Last login: Mon Jul  6 08:57:12 2026</span>
     </div>
   </div>
 
+  <div class="demo-block" id="demo">
+    <h2>See it in action</h2>
+    <div class="demo-stage">
+
+      <div class="demo-scene on" id="demo-editor">
+        <div class="macwin editor">
+          <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Terminal Pal — Edit Commands</div></div>
+          <div class="editor-body">
+            <div class="wf-side">
+              <div class="wf-list">
+                <div class="wf-row sel">Playground</div>
+                <div class="wf-row">Prod</div>
+                <div class="wf-row">Side project</div>
+              </div>
+              <div class="wf-foot">＋ −</div>
+            </div>
+            <div class="main">
+              <span class="dark-field wf-name">Playground</span>
+              <div class="group">
+                <div class="name-row"><span class="dark-field name-field">Dev server</span><span class="tools">↑ ↓ 🗑</span></div>
+                <div class="cmd-row"><span class="cmd-field" id="d-cmd1" data-ph="Command, e.g. ssh mydevbox"></span><span class="wait">wait</span><span class="wait-field" id="d-wait1">0</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+                <div class="cmd-row"><span class="cmd-field" id="d-cmd2" data-ph="Command, e.g. ssh mydevbox"></span><span class="wait">wait</span><span class="wait-field">0</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+                <div class="cmd-row"><span class="cmd-field" id="d-cmd3" data-ph="Command, e.g. ssh mydevbox"></span><span class="wait">wait</span><span class="wait-field">0</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+                <div class="add-btn">＋ Add Command</div>
+              </div>
+              <div class="add-window">＋ Add Window</div>
+            </div>
+          </div>
+          <div class="savebar"><span class="mintdot"></span> Saved automatically</div>
+        </div>
+      </div>
+
+      <div class="demo-scene" id="demo-menu">
+        <div class="menu-wrap">
+          <div class="demo-cursor" id="d-cursor"><svg width="20" height="20" viewBox="0 0 20 20"><path d="M4 1 L4 15.5 L7.5 12.5 L9.8 18 L12.4 16.9 L10.1 11.6 L14.8 11.3 Z" fill="#fff" stroke="#000" stroke-width="1.2"/></svg></div>
+          <div class="menubar-scene">
+            <div class="menubar"><span class="mb-item" id="d-mbicon"><svg viewBox="0 0 18 18" width="16" height="16" fill="none" stroke="#e8ecea" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="15" height="13" rx="3"/><path d="M5 6.8 L7.2 8 L5 9.2"/><path d="M9.8 8 H12.4"/><path d="M5.8 11.4 C7.4 13.2 10.6 13.2 12.2 11.4"/></svg></span><span>Mon Jul 6</span><span>9:01 AM</span></div>
+            <div class="dropdown" id="d-dropdown">
+              <div class="mi hl" id="d-runitem"><span>Run Playground</span><span class="kbd">⌘R</span></div>
+              <div class="mi"><span>Run Prod</span></div>
+              <div class="mi"><span>Run Side project</span></div>
+              <div class="mdivider"></div>
+              <div class="mi"><span>Edit Commands…</span><span class="kbd">⌘E</span></div>
+              <div class="mdivider"></div>
+              <div class="mi"><span>Check for Updates…</span></div>
+              <div class="mi"><span>Quit Terminal Pal</span><span class="kbd">⌘Q</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-scene" id="demo-terms">
+        <div class="terms">
+          <div class="macwin term one">
+            <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Dev server — ssh dev-box</div></div>
+            <div class="screen" id="d-screen1"></div>
+          </div>
+          <div class="macwin term two" id="d-term2">
+            <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Logs — ssh dev-box</div></div>
+            <div class="screen" id="d-screen2"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </section>
 
 <div class="bottom-cta">
@@ -455,6 +590,169 @@ Last login: Mon Jul  6 08:57:12 2026</span>
 </div>
 
 <footer>© 2026 Wes Mason. All rights reserved.</footer>
+<script>
+(function () {
+  var $ = function (s) { return document.querySelector(s); };
+  var sleep = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+
+  async function typeText(el, text, cps) {
+    for (var i = 0; i < text.length; i++) {
+      el.textContent += text[i];
+      await sleep(cps || 42);
+    }
+  }
+
+  function show(id) {
+    ['demo-editor', 'demo-menu', 'demo-terms'].forEach(function (s) {
+      document.getElementById(s).classList.toggle('on', s === id);
+    });
+  }
+
+  function line(screen, html) {
+    var d = document.createElement('div');
+    d.innerHTML = html;
+    screen.appendChild(d);
+    return d;
+  }
+
+  async function typedLine(screen, promptHtml, cmd) {
+    var d = line(screen, promptHtml + '<span class="typed caret"></span>');
+    var span = d.querySelector('.typed');
+    await typeText(span, cmd, 34);
+    span.classList.remove('caret');
+  }
+
+  async function editorScene() {
+    var fields = [$('#d-cmd1'), $('#d-cmd2'), $('#d-cmd3')];
+    fields.forEach(function (f) { f.textContent = ''; f.classList.remove('caret'); });
+    $('#d-wait1').textContent = '0';
+    show('demo-editor');
+    await sleep(800);
+    var cmds = ['ssh dev-box', 'cd ~/code/my-app', 'npm run dev'];
+    for (var i = 0; i < cmds.length; i++) {
+      fields[i].classList.add('caret');
+      await typeText(fields[i], cmds[i]);
+      fields[i].classList.remove('caret');
+      if (i === 0) { await sleep(300); $('#d-wait1').textContent = '2'; }
+      await sleep(380);
+    }
+    await sleep(1000);
+  }
+
+  function moveCursorTo(el) {
+    var wrap = $('#demo-menu .menu-wrap');
+    var cursor = $('#d-cursor');
+    var wr = wrap.getBoundingClientRect();
+    var er = el.getBoundingClientRect();
+    cursor.style.left = (er.left - wr.left + er.width / 2 - 4) + 'px';
+    cursor.style.top = (er.top - wr.top + er.height / 2 - 2) + 'px';
+  }
+
+  async function menuScene() {
+    var cursor = $('#d-cursor');
+    var icon = $('#d-mbicon');
+    var dropdown = $('#d-dropdown');
+    var runItem = $('#d-runitem');
+    runItem.classList.remove('clicked');
+    icon.classList.remove('active');
+    dropdown.classList.remove('open');
+    show('demo-menu');
+
+    // Cursor enters from below, without a transition jump.
+    cursor.classList.add('jump');
+    cursor.style.left = '70px';
+    cursor.style.top = '310px';
+    cursor.offsetHeight; // force reflow so the start position takes
+    cursor.classList.remove('jump');
+    cursor.style.opacity = '1';
+    await sleep(450);
+
+    // Click the menu bar icon…
+    moveCursorTo(icon);
+    await sleep(750);
+    icon.classList.add('active');
+    await sleep(220);
+    dropdown.classList.add('open');
+    await sleep(550);
+
+    // …then click Run Playground.
+    moveCursorTo(runItem);
+    await sleep(800);
+    runItem.classList.add('clicked');
+    await sleep(500);
+    cursor.style.opacity = '0';
+    await sleep(300);
+  }
+
+  async function termScene() {
+    var s1 = $('#d-screen1'), s2 = $('#d-screen2');
+    s1.innerHTML = ''; s2.innerHTML = '';
+    $('#d-term2').classList.remove('shown');
+    show('demo-terms');
+    await sleep(450);
+
+    await typedLine(s1, '<span class="t-prompt">~ $</span> ', 'ssh dev-box');
+    await sleep(350);
+    line(s1, '<span class="t-dim">Welcome to dev-box (Ubuntu 24.04.2 LTS)</span>');
+    line(s1, '<span class="t-dim">Last login: Mon Jul  6 08:57:12 2026</span>');
+    await sleep(400);
+    await typedLine(s1, '<span class="t-prompt">wes@dev-box:~$</span> ', 'cd ~/code/my-app');
+    await sleep(250);
+    await typedLine(s1, '<span class="t-prompt">wes@dev-box:~/code/my-app$</span> ', 'npm run dev');
+    await sleep(450);
+    line(s1, '<span class="t-dim">&gt; my-app@2.4.1 dev</span>');
+    line(s1, '<span class="t-dim">&gt; next dev</span>');
+    await sleep(350);
+    line(s1, '   <span class="t-accent">▲ Next.js 15.3</span>');
+    line(s1, '   <span class="t-dim">- Local:  http://localhost:3000</span>');
+    await sleep(500);
+    line(s1, ' <span class="t-ok">✓ Ready in 1.2s</span>');
+
+    await sleep(500);
+    $('#d-term2').classList.add('shown');
+    await sleep(400);
+    await typedLine(s2, '<span class="t-prompt">~ $</span> ', 'ssh dev-box');
+    await sleep(300);
+    line(s2, '<span class="t-dim">Welcome to dev-box (Ubuntu 24.04.2 LTS)</span>');
+    await sleep(300);
+    await typedLine(s2, '<span class="t-prompt">wes@dev-box:~$</span> ', 'tail -f ~/code/my-app/logs/app.log');
+    await sleep(450);
+    line(s2, '<span class="t-dim">09:01:12</span> <span class="t-ok">INFO</span>  server listening on :3000');
+    await sleep(350);
+    line(s2, '<span class="t-dim">09:01:14</span> <span class="t-ok">INFO</span>  GET / 200 12ms');
+    await sleep(350);
+    line(s2, '<span class="t-dim">09:01:15</span> <span class="t-ok">INFO</span>  GET /api/session 200 4ms');
+
+    await sleep(2800);
+  }
+
+  async function loop() {
+    while (true) {
+      await editorScene();
+      await menuScene();
+      await termScene();
+    }
+  }
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var started = false;
+    var observer = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting && !started) {
+        started = true;
+        observer.disconnect();
+        loop();
+      }
+    }, { threshold: 0.35 });
+    observer.observe(document.getElementById('demo'));
+  } else {
+    // Reduced motion: show the editor pre-filled, no animation.
+    $('#d-cmd1').textContent = 'ssh dev-box';
+    $('#d-cmd2').textContent = 'cd ~/code/my-app';
+    $('#d-cmd3').textContent = 'npm run dev';
+    $('#d-wait1').textContent = '2';
+  }
+})();
+</script>
 <script>
   // GA4's built-in file_download event doesn't cover .dmg, so track it manually.
   document.querySelectorAll('a.download').forEach(function (link) {
