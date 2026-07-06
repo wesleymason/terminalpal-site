@@ -29,7 +29,7 @@
   "image": "https://www.terminalpal.com/social-card.png",
   "url": "https://www.terminalpal.com/",
   "downloadUrl": "https://www.terminalpal.com/TerminalPal.dmg",
-  "softwareVersion": "1.0",
+  "softwareVersion": "1.0.1",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -43,18 +43,29 @@
 </script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; overflow: hidden; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
-    background: radial-gradient(120% 120% at 50% 0%, #3a3a40 0%, #232326 45%, #161618 100%);
+    background: #1e1e21;
     color: #f2f7f6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ---------- Hero (unchanged look, one full screen) ---------- */
+  .hero {
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    -webkit-font-smoothing: antialiased;
+    gap: 28px;
+    padding: 24px;
+    background:
+      linear-gradient(to bottom, rgba(30, 30, 33, 0) 80%, #1e1e21 100%),
+      radial-gradient(120% 120% at 50% 0%, #3a3a40 0%, #232326 45%, #1e1e21 100%);
   }
-  main { display: flex; flex-direction: column; align-items: center; gap: 28px; padding: 24px; }
   .icon { width: 148px; height: 148px; }
   h1 { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; }
   p.tag { font-size: 20px; color: #b9c4c1; max-width: 560px; line-height: 1.5; }
@@ -72,25 +83,327 @@
     box-shadow: 0 8px 28px rgba(213, 242, 238, 0.18);
   }
   a.download:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(213, 242, 238, 0.28); }
+  a.how-link {
+    color: #7d8886;
+    font-size: 17px;
+    text-decoration: none;
+  }
+  a.how-link:hover { color: #d5f2ee; }
+
+  /* ---------- How it works ---------- */
+  .how {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 96px 24px 0;
+  }
+  .how h2 {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 72px;
+  }
+  .step { margin-bottom: 96px; }
+  .step:last-child { margin-bottom: 0; }
+  .step-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    max-width: 640px;
+    margin: 0 auto 28px;
+  }
+  .step-num {
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #d5f2ee;
+    color: #161618;
+    font-weight: 700;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(1px);
+  }
+  .step h3 { font-size: 22px; font-weight: 650; }
+  .step p.desc { color: #9aa5a2; font-size: 15px; line-height: 1.5; margin-top: 6px; }
+
+  /* ---------- Shared mac window chrome ---------- */
+  .macwin {
+    border-radius: 12px;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.55), 0 2px 10px rgba(0,0,0,0.4);
+    overflow: hidden;
+    text-align: left;
+  }
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px;
+    position: relative;
+  }
+  .dots { display: flex; gap: 8px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; } .dot.y { background: #febc2e; } .dot.g { background: #28c840; }
+  .titlebar .title {
+    position: absolute;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    pointer-events: none;
+  }
+
+  /* ---------- Step 1: editor window ---------- */
+  .editor { background: #eef6f4; color: #1d1d1f; max-width: 640px; margin: 0 auto; }
+  .editor .titlebar { background: #e2ecea; }
+  .editor .title { color: #6e7876; }
+  .editor .body { padding: 18px 20px 14px; }
+  .editor .hint { font-size: 12.5px; color: #7a8481; line-height: 1.45; margin-bottom: 14px; }
+  .group {
+    background: #ffffff;
+    border: 1px solid rgba(52, 143, 124, 0.28);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+  }
+  .group .name-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .name-field {
+    border: 1px solid #d5dbd9;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 13px;
+    padding: 5px 9px;
+    width: 180px;
+    color: #1d1d1f;
+  }
+  .group .tools { margin-left: auto; color: #9aa5a2; font-size: 12px; letter-spacing: 3px; }
+  .cmd-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .cmd-field {
+    flex: 1;
+    border: 1px solid #d5dbd9;
+    border-radius: 6px;
+    background: #fff;
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    font-size: 12.5px;
+    padding: 6px 9px;
+    color: #1d1d1f;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .wait { font-size: 11px; color: #8a9491; }
+  .wait-field {
+    width: 34px;
+    border: 1px solid #d5dbd9;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 12px;
+    padding: 5px 6px;
+    text-align: right;
+    color: #1d1d1f;
+  }
+  .row-tools { color: #9aa5a2; font-size: 12px; letter-spacing: 3px; }
+  .add-btn { color: #348f7c; font-size: 12.5px; font-weight: 600; margin-top: 2px; }
+  .add-window { color: #348f7c; font-size: 13.5px; font-weight: 600; margin: 2px 0 6px; }
+  .editor .savebar {
+    border-top: 1px solid #dbe5e2;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #7a8481;
+  }
+  .savebar .mintdot { width: 6px; height: 6px; border-radius: 50%; background: #348f7c; }
+
+  /* ---------- Step 2: menu bar dropdown ---------- */
+  .menubar-scene { max-width: 400px; margin: 0 auto; }
+  .menubar {
+    background: rgba(38, 38, 42, 0.96);
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    padding: 7px 16px;
+    font-size: 13px;
+    color: #e8ecea;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.55);
+  }
+  .menubar .glyph { font-family: "SF Mono", ui-monospace, Menlo, monospace; font-weight: 700; color: #d5f2ee; }
+  .dropdown {
+    background: rgba(48, 48, 53, 0.98);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 10px;
+    margin: 4px 10px 0 auto;
+    width: 280px;
+    padding: 5px;
+    font-size: 13.5px;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.6);
+    text-align: left;
+  }
+  .mi {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: #ececee;
+  }
+  .mi.hl { background: #d5f2ee; color: #161618; font-weight: 600; }
+  .mi .kbd { color: inherit; opacity: 0.55; }
+  .mdivider { height: 1px; background: rgba(255,255,255,0.12); margin: 5px 12px; }
+
+  /* ---------- Step 3: terminals ---------- */
+  .terms { position: relative; max-width: 640px; margin: 0 auto; height: 365px; }
+  .term {
+    position: absolute;
+    width: 86%;
+    background: #1b1b1e;
+    color: #d7dedc;
+  }
+  .term .titlebar { background: #2a2a2e; }
+  .term .title { color: #9aa19f; }
+  .term .screen {
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    font-size: 12px;
+    line-height: 1.65;
+    padding: 12px 16px 18px;
+    white-space: pre;
+    overflow: hidden;
+  }
+  .term.one { top: 0; left: 0; z-index: 1; }
+  .term.two { top: 150px; right: 0; z-index: 2; }
+  .t-prompt { color: #7ddbc3; }
+  .t-dim { color: #82918d; }
+  .t-ok { color: #58c98a; }
+  .t-accent { color: #d5f2ee; }
+
+  /* ---------- Bottom CTA ---------- */
+  .bottom-cta {
+    text-align: center;
+    padding: 56px 24px 72px;
+  }
+
+  /* ---------- Footer ---------- */
   footer {
-    position: fixed;
-    bottom: 16px;
-    left: 0;
-    right: 0;
     text-align: center;
     font-size: 12px;
     color: #6b7573;
+    padding: 28px 0 20px;
   }
-  @media (max-height: 560px) { .icon { width: 96px; height: 96px; } h1 { font-size: 34px; } }
+
+  @media (max-width: 620px) {
+    h1 { font-size: 34px; }
+    .terms { height: auto; }
+    .term { position: static; width: 100%; margin-bottom: 16px; }
+  }
 </style>
 </head>
 <body>
-<main>
+
+<section class="hero">
   <img class="icon" src="icon.png" alt="Terminal Pal — Mac app that automates repetitive terminal commands" width="148" height="148">
   <h1>Terminal Pal</h1>
   <p class="tag"><strong>All of your terminal commands, one click.</strong><br>Terminal Pal opens your terminal windows and<br>types your saved commands for you.<br>Set it up once, never type them again.</p>
   <a class="download" href="TerminalPal.dmg" download>Download for Mac</a>
-</main>
-<footer>© 2026 Wesley Mason. All rights reserved.</footer>
+  <a class="how-link" href="#how">See how it works ↓</a>
+</section>
+
+<section class="how" id="how">
+  <h2>How it works</h2>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Save your commands, once</h3>
+        <p class="desc">Add a window for each terminal you open every day, and the commands that go in it, with a short wait where something needs time, like an SSH connection.</p>
+      </div>
+    </div>
+    <div class="macwin editor">
+      <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Terminal Pal — Edit Commands</div></div>
+      <div class="body">
+        <p class="hint">Each group opens its own terminal window and types its commands in order. Add a delay after any command that needs time to finish — e.g. 2–3 seconds after `ssh` so it can connect before the next command is sent.</p>
+        <div class="group">
+          <div class="name-row"><span class="name-field">Dev server</span><span class="tools">↑ ↓ 🗑</span></div>
+          <div class="cmd-row"><span class="cmd-field">ssh dev-box</span><span class="wait">wait</span><span class="wait-field">2</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+          <div class="cmd-row"><span class="cmd-field">cd ~/code/my-app</span><span class="wait">wait</span><span class="wait-field">0</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+          <div class="cmd-row"><span class="cmd-field">npm run dev</span><span class="wait">wait</span><span class="wait-field">0</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+          <div class="add-btn">＋ Add Command</div>
+        </div>
+        <div class="group">
+          <div class="name-row"><span class="name-field">Logs</span><span class="tools">↑ ↓ 🗑</span></div>
+          <div class="cmd-row"><span class="cmd-field">ssh dev-box</span><span class="wait">wait</span><span class="wait-field">2</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+          <div class="cmd-row"><span class="cmd-field">tail -f ~/code/my-app/logs/app.log</span><span class="wait">wait</span><span class="wait-field">0</span><span class="wait">s</span><span class="row-tools">↑ ↓ ✕</span></div>
+          <div class="add-btn">＋ Add Command</div>
+        </div>
+        <div class="add-window">＋ Add Window</div>
+      </div>
+      <div class="savebar"><span class="mintdot"></span> Saved automatically</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">2</div>
+      <div>
+        <h3>One click every morning</h3>
+        <p class="desc">Terminal Pal lives in your menu bar. Click the icon, hit Run Startup Commands, and it does the work for you.</p>
+      </div>
+    </div>
+    <div class="menubar-scene">
+      <div class="menubar"><span class="glyph">&gt;‿</span><span>Mon Jul 6</span><span>9:01 AM</span></div>
+      <div class="dropdown">
+        <div class="mi hl"><span>Run Startup Commands</span><span class="kbd">⌘R</span></div>
+        <div class="mi"><span>Edit Commands…</span><span class="kbd">⌘E</span></div>
+        <div class="mdivider"></div>
+        <div class="mi"><span>Check for Updates…</span></div>
+        <div class="mi"><span>Quit Terminal Pal</span><span class="kbd">⌘Q</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-head">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Everything opens itself</h3>
+        <p class="desc">Your terminal windows open one after another, and every saved command is typed for you, including the ones that run on the remote after SSH connects.</p>
+      </div>
+    </div>
+    <div class="terms">
+      <div class="macwin term one">
+        <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Dev server — ssh dev-box</div></div>
+        <div class="screen"><span class="t-prompt">~ $</span> ssh dev-box
+<span class="t-dim">Welcome to dev-box (Ubuntu 24.04.2 LTS)
+Last login: Mon Jul  6 08:57:12 2026</span>
+<span class="t-prompt">wes@dev-box:~$</span> cd ~/code/my-app
+<span class="t-prompt">wes@dev-box:~/code/my-app$</span> npm run dev
+<span class="t-dim">&gt; my-app@2.4.1 dev
+&gt; next dev</span>
+   <span class="t-accent">▲ Next.js 15.3</span>
+   <span class="t-dim">- Local:  http://localhost:3000</span>
+ <span class="t-ok">✓ Ready in 1.2s</span></div>
+      </div>
+      <div class="macwin term two">
+        <div class="titlebar"><div class="dots"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div><div class="title">Logs — ssh dev-box</div></div>
+        <div class="screen"><span class="t-prompt">~ $</span> ssh dev-box
+<span class="t-dim">Welcome to dev-box (Ubuntu 24.04.2 LTS)</span>
+<span class="t-prompt">wes@dev-box:~$</span> tail -f ~/code/my-app/logs/app.log
+<span class="t-dim">09:01:12</span> <span class="t-ok">INFO</span>  server listening on :3000
+<span class="t-dim">09:01:14</span> <span class="t-ok">INFO</span>  GET / 200 12ms
+<span class="t-dim">09:01:15</span> <span class="t-ok">INFO</span>  GET /api/session 200 4ms</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="bottom-cta">
+  <a class="download" href="TerminalPal.dmg" download>Download for Mac</a>
+</div>
+
+<footer>© 2026 Wes Mason. All rights reserved.</footer>
 </body>
 </html>
