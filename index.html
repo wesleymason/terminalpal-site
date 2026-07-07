@@ -802,23 +802,36 @@ Last login: Mon Jul  6 08:57:12 2026</span>
     await sleep(2800);
   }
 
-  async function loop() {
-    while (true) {
-      await editorScene();
-      await menuScene();
-      await termScene();
-    }
+  // The demo only plays while scrolled into view: it starts from scene one
+  // each time it enters, and stops (at the next scene boundary) on exit.
+  var gen = 0;
+  var loopDone = Promise.resolve();
+
+  function startLoop() {
+    var myGen = ++gen;
+    loopDone = (function (previous) {
+      return (async function () {
+        await previous.catch(function () {});
+        if (myGen !== gen) return;
+        while (myGen === gen) {
+          await editorScene();
+          if (myGen !== gen) break;
+          await menuScene();
+          if (myGen !== gen) break;
+          await termScene();
+        }
+      })();
+    })(loopDone);
   }
 
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var started = false;
     var observer = new IntersectionObserver(function (entries) {
-      if (entries[0].isIntersecting && !started) {
-        started = true;
-        observer.disconnect();
-        loop();
+      if (entries[0].isIntersecting) {
+        startLoop();
+      } else {
+        gen++;
       }
-    }, { threshold: 0.35 });
+    }, { threshold: 0.55 });
     observer.observe(document.getElementById('demo'));
   } else {
     // Reduced motion: show the editor pre-filled, no animation.
